@@ -1,0 +1,73 @@
+﻿@using POSTest.ViewModels
+@model ShoppingCartVm
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+                            {
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <img src="@item.Product.PictureUrl" width="90px" alt="" />
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <a asp-controller="Home" asp-action="Details" asp-route-id=@item.Product.Id>
+                                                <h6>@item.Product.Name</h6>
+                                            </a>
+                                            <h5>@item.Product.Price BHD</h5>
+                                        </div>
+                                    </td>
+                                    <td class="quantity__item">
+                                        <div class="quantity">
+                                            <div>
+                                                <a asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id="@item.Product.Id" style="background:none;border:none;margin:0;padding:0;cursor: pointer;" class="fa fa-angle-left dec qtybtn"></a>
+                                                &nbsp; &nbsp; <span>@item.Amount</span> &nbsp; &nbsp;
+                                                <a asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Product.Id" style="background:none;border:none;margin:0;padding:0;cursor: pointer;" class="fa fa-angle-right inc qtybtn"></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">@(item.Product.Price*item.Amount) BHD</td>
+                                    <td class="cart__close"><a asp-controller="Orders" asp-action="RemoveAllItemFromShoppingCart" asp-route-id="@item.Product.Id"><i class="fa fa-close"></i></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="btn btn-outline-primary">
+                            <a asp-controller="Products" asp-action="Index">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 border-success">
+                <div class="cart__total">
+                    <h6>Cart total</h6>
+                    <ul>
+                        <li>Total <span>@Model.ShoppingCartTotal BHD</span></li>
+                    </ul>
+                    <a asp-action="Checkout" class="btn btn-outline-success">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,123 @@
+﻿@using POSTest.Payloads
+@model SizesPayload
+@{
+    ViewData["Title"] = "Create Product Sizes";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class=" col-md-12 page-header d-md-flex justify-content-between">
+            <div>
+                <h3>Users</h3>
+                <nav aria-label="breadcrumb" class="d-flex align-items-start">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Index" asp-controller="home">Items Management</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Add new item</h6>
+                </div>
+                <form class="col-md-12 row" asp-action="AddNewSizes">
+                    <div id="frmItem">
+                        <div class="modal-body">
+                            <input hidden asp-for="@Model.ProductId" />
+                            <div class="row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <input hidden asp-for="@Model.Size1.ProductId" value="@Model.ProductId"/>
+                                            <label asp-for="@Model.Size1.Name">Size Name</label>
+                                            <input asp-for="@Model.Size1.Name" class="form-control" />
+                                            <span asp-validation-for="@Model.Size1.Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size1.Price">Size Price</label>
+                                            <input asp-for="@Model.Size1.Price" class="form-control" />
+                                            <span asp-validation-for="@Model.Size1.Price" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size2.Name">Size Name</label>
+                                            <input asp-for="@Model.Size2.Name" class="form-control" />
+                                            <span asp-validation-for="@Model.Size2.Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size1.Price">Size Price</label>
+                                            <input asp-for="@Model.Size2.Price" class="form-control" />
+                                            <span asp-validation-for="@Model.Size2.Price" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size3.Name">Size Name</label>
+                                            <input asp-for="@Model.Size3.Name" class="form-control" />
+                                            <span asp-validation-for="@Model.Size3.Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size3.Price">Size Price</label>
+                                            <input asp-for="@Model.Size3.Price" class="form-control" />
+                                            <span asp-validation-for="@Model.Size3.Price" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size4.Name">Size Name</label>
+                                            <input asp-for="@Model.Size4.Name" class="form-control" />
+                                            <span asp-validation-for="@Model.Size4.Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Size4.Price">Size Price</label>
+                                            <input asp-for="@Model.Size4.Price" class="form-control" />
+                                            <span asp-validation-for="@Model.Size4.Price" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                Return
+                            </a>
+                            <button type="submit" id="btnSaveHours" class="btn btn-primary" title="Save">Finish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts
+{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<script type="text/javascript">
+</script>
+}

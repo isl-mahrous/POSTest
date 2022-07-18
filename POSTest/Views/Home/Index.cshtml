@@ -1,0 +1,99 @@
+﻿@using POSTest.Payloads
+@using POSTest.ViewModels
+
+@model List<ProductVm>
+@{
+    ViewData["Title"] = "Home page";
+    var Payload = (ProductPayload)ViewBag.Payload;
+}
+
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Users</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="index" asp-controller="home">Items Management</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="mt-2 mt-md-0">
+        <a asp-action="CreateProduct" class="btn btn-success">Add new item</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="user-list" class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Sizes</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td>
+                                        <a href="#">
+                                            <figure class="avatar avatar-sm mr-2">
+                                                <img src="@product.PictureUrl"
+                                                 class="rounded-circle" alt="avatar">
+                                            </figure>
+                                            @product.Name
+                                        </a>
+                                    </td>
+                                    <td>@product.Price BHD</td>
+                                    <td>
+                                        @product.Sizes.Count
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown"
+                                           class="btn btn-floating"
+                                           aria-haspopup="true" aria-expanded="false">
+                                                <i class="ti-more-alt"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a asp-action="UpdateProduct" asp-route-id="@product.Id" class="dropdown-item text-success">Edit</a>
+                                                <a asp-action="Delete" asp-route-id="@product.Id" class="dropdown-item text-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).on('click', '.add-size', function(){
+        var size = $('div[for="sizes"]:first').clone();
+
+        size.find('.add-size').remove();
+        $('#frmItem .modal-body').append(size);
+    });
+
+    $(document).on('click', '.remove-size', function () {
+        $(this).closest('div[for="sizes"]').remove();
+    });
+</script>
+}

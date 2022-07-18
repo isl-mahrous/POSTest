@@ -1,0 +1,77 @@
+﻿@using Microsoft.Extensions.Options
+@using POSTest.ViewModels
+@model ShoppingCartVm
+
+@{
+    ViewData["Title"] = "Shopping Cart Summary";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+<link href="~/css/CartSummary.css" rel="stylesheet" />
+
+<main class="page">
+    <section class="shopping-cart dark">
+        <div class="container">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="items">
+                            @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+                            {
+                                <div class="product">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img class="img-fluid mx-auto d-block image" src="@item.Product.PictureUrl">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="info">
+                                                <div class="row">
+                                                    <div class="col-md-5 product-name">
+                                                        <div class="product-name">
+                                                            <a asp-controller="Mobiles" asp-action="Details" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class=" col-md-3 quantity">
+                                                        <p>Quantity:</p>
+                                                        <a class="text-success" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Product.Id"><i class="bi bi-plus-square"></i></a>
+                                                        <span class="mx-2 text-dark"><b>@item.Amount</b></span>
+                                                        <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id="@item.Product.Id"><i class="bi bi-dash-square"></i></a>
+                                                    </div>
+                                                    <div class="col-md-4 price">
+                                                        <span>@(item.Product.Price*item.Amount)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <div class="summary">
+                            <h3>Summary</h3>
+                            <div class="summary-item"><span class="text">Subtotal</span><span class="price">@Model.ShoppingCartTotal.ToString() </span></div>
+                            <div class="summary-item"><span class="text">Discount</span><span class="price">21 BHD</span></div>
+                            <div class="summary-item"><span class="text">Shipping</span><span class="price">21 BHD</span></div>
+                            <div class="summary-item"><span class="text">Total</span><span class="price">@Model.ShoppingCartTotal.ToString() </span></div>
+                            <div class="text-center">
+                                <a class="btn btn-primary btn-lg btn-block my-2" asp-controller="Orders" asp-action="Checkout">
+                                    Complete the order
+                                </a>
+                                <a class="btn btn-success btn-lg btn-block my-2" asp-controller="Products" asp-action="Index">
+                                    Add more items
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

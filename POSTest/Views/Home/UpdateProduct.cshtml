@@ -1,0 +1,78 @@
+﻿@using POSTest.Payloads
+@using POSTest.ViewModels
+@model ProductVm
+@{
+    ViewData["Title"] = "Update Product";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class=" col-md-12 page-header d-md-flex justify-content-between">
+            <div>
+                <h3>Users</h3>
+                <nav aria-label="breadcrumb" class="d-flex align-items-start">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Index" asp-controller="home">Items Management</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <form class="col-md-12 row" asp-action="UpdateProduct">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Add new item</h6>
+                    </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input hidden asp-for="Id" />
+                    <div id="frmItem">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label asp-for=@Model.Name>Item Name</label>
+                                        <input asp-for=@Model.Name class="form-control" />
+                                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label asp-for=@Model.Price>Price</label>
+                                        <input asp-for=@Model.Price class="form-control" />
+                                        <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                Return
+                            </a>
+                            <button type="submit" id="btnSaveHours" class="btn btn-primary" title="Save">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts
+{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<script type="text/javascript">
+</script>
+}
